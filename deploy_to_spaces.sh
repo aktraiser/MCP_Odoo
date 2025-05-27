@@ -6,7 +6,7 @@
 
 if [ $# -eq 0 ]; then
     echo "Usage: $0 <username/space-name>"
-    echo "Exemple: $0 aktraiser/MCP_Odoo"
+    echo "Exemple: $0 Aktraiser/MCP_Odoo"
     exit 1
 fi
 
