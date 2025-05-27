@@ -141,57 +141,119 @@ def test_connection():
     success = init_odoo_connection()
     return connection_status
 
+# Function to update environment variables and reconnect
+def update_config(odoo_url, odoo_db, odoo_login, odoo_password, openai_key):
+    """Update configuration and test connection"""
+    global ODOO_URL, ODOO_DB, ODOO_LOGIN, ODOO_PASSWORD, OPENAI_API_KEY
+    
+    # Update global variables
+    ODOO_URL = odoo_url
+    ODOO_DB = odoo_db
+    ODOO_LOGIN = odoo_login
+    ODOO_PASSWORD = odoo_password
+    OPENAI_API_KEY = openai_key
+    
+    # Update OpenAI API key
+    if openai_key:
+        openai.api_key = openai_key
+    
+    # Test Odoo connection
+    success = init_odoo_connection()
+    
+    if success:
+        return "✅ Configuration mise à jour et connexion réussie !"
+    else:
+        return f"❌ Configuration mise à jour mais connexion échouée : {connection_status}"
+
 # Build Gradio Interfaces as MCP tools
 with gr.Blocks(title="Agent CRM MCP Server") as mcp_app:
     gr.Markdown("# Agent CRM MCP Tools")
     
-    # Connection Status
-    with gr.Row():
-        status_display = gr.Textbox(label="Statut de connexion", value=connection_status, interactive=False)
-        test_btn = gr.Button("Tester la connexion")
-        test_btn.click(test_connection, outputs=status_display)
+    # Configuration Section
+    with gr.Tab("Configuration"):
+        gr.Markdown("## Configuration des paramètres de connexion")
+        gr.Markdown("Renseignez vos paramètres de connexion ci-dessous :")
+        
+        with gr.Column():
+            odoo_url_input = gr.Textbox(
+                label="URL Odoo", 
+                placeholder="https://votre-instance.odoo.com",
+                value=ODOO_URL or ""
+            )
+            odoo_db_input = gr.Textbox(
+                label="Base de données Odoo", 
+                placeholder="nom_de_votre_db",
+                value=ODOO_DB or ""
+            )
+            odoo_login_input = gr.Textbox(
+                label="Login Odoo", 
+                placeholder="votre.email@exemple.com",
+                value=ODOO_LOGIN or ""
+            )
+            odoo_password_input = gr.Textbox(
+                label="Mot de passe Odoo", 
+                type="password",
+                placeholder="Votre mot de passe",
+                value=ODOO_PASSWORD or ""
+            )
+            openai_key_input = gr.Textbox(
+                label="Clé API OpenAI", 
+                type="password",
+                placeholder="sk-...",
+                value=OPENAI_API_KEY or ""
+            )
+            
+            update_btn = gr.Button("Mettre à jour la configuration", variant="primary")
+            config_status = gr.Textbox(label="Statut", interactive=False)
+            
+            update_btn.click(
+                update_config,
+                inputs=[odoo_url_input, odoo_db_input, odoo_login_input, odoo_password_input, openai_key_input],
+                outputs=config_status
+            )
     
-    gr.Markdown("## Configuration requise")
-    gr.Markdown("""
-    Pour utiliser cette application, configurez les variables d'environnement suivantes dans les Settings de votre Space :
-    - `ODOO_URL` : URL de votre instance Odoo
-    - `ODOO_DB` : Nom de votre base de données
-    - `ODOO_LOGIN` : Nom d'utilisateur Odoo
-    - `ODOO_PASSWORD` : Mot de passe Odoo
-    - `OPENAI_API_KEY` : Votre clé API OpenAI
-    """)
-    
-    # Ingest Prospects
-    gr.Interface(
-        fn=ingest_prospects,
-        inputs=gr.JSON(label="Leads (list of records)"),
-        outputs=gr.JSON(label="Created Lead IDs"),
-        title="Ingest Prospects",
-    )
-    # Qualify Lead
-    gr.Interface(
-        fn=qualify_lead,
-        inputs=gr.Number(label="Lead ID", precision=0),
-        outputs=gr.Text(label="Summary & Score"),
-        title="Qualify Lead",
-    )
-    # Generate Offer
-    gr.Interface(
-        fn=generate_offer,
-        inputs=[
-            gr.Number(label="Lead ID", precision=0),
-            gr.Dropdown(label="Tone", choices=["formel", "vendeur", "technique"], value="formel")
-        ],
-        outputs=gr.Text(label="Proposal Email"),
-        title="Generate Offer",
-    )
-    # Summarize Opportunity
-    gr.Interface(
-        fn=summarize_opportunity,
-        inputs=gr.Number(label="Lead ID", precision=0),
-        outputs=gr.Text(label="Opportunity Summary"),
-        title="Summarize Opportunity",
-    )
+    # Main Tools Section
+    with gr.Tab("Outils CRM"):
+        # Connection Status
+        with gr.Row():
+            status_display = gr.Textbox(label="Statut de connexion", value=connection_status, interactive=False)
+            test_btn = gr.Button("Tester la connexion")
+            test_btn.click(test_connection, outputs=status_display)
+        
+        gr.Markdown("## Outils disponibles")
+        gr.Markdown("Utilisez les outils ci-dessous une fois la connexion établie.")
+        
+        # Ingest Prospects
+        gr.Interface(
+            fn=ingest_prospects,
+            inputs=gr.JSON(label="Leads (list of records)"),
+            outputs=gr.JSON(label="Created Lead IDs"),
+            title="Ingest Prospects",
+        )
+        # Qualify Lead
+        gr.Interface(
+            fn=qualify_lead,
+            inputs=gr.Number(label="Lead ID", precision=0),
+            outputs=gr.Text(label="Summary & Score"),
+            title="Qualify Lead",
+        )
+        # Generate Offer
+        gr.Interface(
+            fn=generate_offer,
+            inputs=[
+                gr.Number(label="Lead ID", precision=0),
+                gr.Dropdown(label="Tone", choices=["formel", "vendeur", "technique"], value="formel")
+            ],
+            outputs=gr.Text(label="Proposal Email"),
+            title="Generate Offer",
+        )
+        # Summarize Opportunity
+        gr.Interface(
+            fn=summarize_opportunity,
+            inputs=gr.Number(label="Lead ID", precision=0),
+            outputs=gr.Text(label="Opportunity Summary"),
+            title="Summarize Opportunity",
+        )
 
 # Launch as MCP Server
 if __name__ == "__main__":
