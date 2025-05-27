@@ -4,7 +4,7 @@
 # Usage: ./deploy_to_spaces.sh <username/space-name>
 
 if [ $# -eq 0 ]; then
-    echo "Usage: $0 <aktraiser/MCP_Odoo>"
+    echo "Usage: $0 aktraiser/MCP_Odoo"
     echo "Exemple: $0 lucasbometon/mcp-odoo"
     exit 1
 fi
