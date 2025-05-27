@@ -10,9 +10,9 @@ if [ $# -eq 0 ]; then
 fi
 
 SPACE_NAME=$1
-HF_REPO="https://huggingface.co/spaces/$SPACE_NAME"
+HF_REPO="https://huggingface.co/spaces/aktraiser"
 
-echo "🚀 Déploiement vers Hugging Face Spaces: $SPACE_NAME"
+echo "🚀 Déploiement vers Hugging Face Spaces: aktraiser"
 
 # Vérifier si le remote huggingface existe déjà
 if git remote get-url huggingface >/dev/null 2>&1; then
@@ -36,4 +36,4 @@ git commit -m "Deploy to Hugging Face Spaces" || echo "Rien à commiter"
 git push huggingface main
 
 echo "✅ Déploiement terminé !"
-echo "🌐 Votre Space sera disponible sur: https://huggingface.co/spaces/$SPACE_NAME" 
+echo "🌐 Votre Space sera disponible sur: https://huggingface.co/spaces/aktraiser" 
