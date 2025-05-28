@@ -25,11 +25,11 @@ def create_crm_tab():
         with gr.Group():
             gr.Markdown("### 📥 Ingest Prospects")
             gr.Markdown("Créer des leads dans Odoo à partir d'une liste de prospects")
+            gr.Markdown("**Format attendu :** `[{\"name\": \"Prospect Test\", \"partner_name\": \"Entreprise Test\", \"email_from\": \"test@exemple.com\"}]`")
             
             leads_input = gr.Code(
                 label="Leads (JSON format)",
                 language="json",
-                placeholder='[{"name": "Prospect Test", "partner_name": "Entreprise Test", "email_from": "test@exemple.com"}]',
                 lines=10,
                 interactive=True
             )
