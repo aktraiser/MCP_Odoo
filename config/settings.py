@@ -12,7 +12,7 @@ class Config:
     """Classe de configuration centralisée"""
     
     def __init__(self):
-        # Configuration Odoo avec valeurs par défaut pour les tests et déploiement
+        # Configuration Odoo - utilise les variables d'environnement ou valeurs par défaut
         self.odoo_url = os.getenv("ODOO_URL", "dasein.odoo.com")
         self.odoo_db = os.getenv("ODOO_DB", "dasein")
         self.odoo_login = os.getenv("ODOO_LOGIN", "lbometon@hotmail.fr")
