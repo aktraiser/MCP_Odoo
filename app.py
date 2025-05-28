@@ -12,6 +12,9 @@ from typing import List, Dict, Any
 # Ajouter le répertoire racine au path pour les imports
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
+# Activer le serveur MCP via variable d'environnement
+os.environ["GRADIO_MCP_SERVER"] = "True"
+
 from config.settings import config
 from odoo_connector.connection import odoo_connector
 
@@ -272,13 +275,12 @@ def main():
     """Point d'entrée principal pour Hugging Face Spaces"""
     print("🚀 Lancement de l'application MCP Odoo CRM...")
     
-    # Lancer l'application avec le serveur MCP activé
+    # Lancer l'application (le serveur MCP est activé via la variable d'environnement)
     demo.launch(
         server_name="0.0.0.0",
         server_port=7860,
         share=False,
-        debug=False,
-        mcp_server=True  # 🎯 Activation du serveur MCP natif de Gradio !
+        debug=False
     )
 
 if __name__ == "__main__":
