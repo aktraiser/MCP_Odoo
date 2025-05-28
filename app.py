@@ -303,36 +303,108 @@ with gr.Blocks(title="Agent CRM MCP Server") as mcp_app:
         gr.Markdown("Utilisez les outils ci-dessous une fois la connexion établie.")
         
         # Ingest Prospects
-        gr.Interface(
-            fn=ingest_prospects,
-            inputs=gr.JSON(label="Leads (list of records)"),
-            outputs=gr.JSON(label="Created Lead IDs"),
-            title="Ingest Prospects",
-        )
+        with gr.Group():
+            gr.Markdown("### 📥 Ingest Prospects")
+            gr.Markdown("Créer des leads dans Odoo à partir d'une liste de prospects")
+            
+            leads_input = gr.Code(
+                label="Leads (JSON format)",
+                language="json",
+                placeholder='[{"name": "Prospect Test", "partner_name": "Entreprise Test", "email_from": "test@exemple.com"}]',
+                lines=10,
+                interactive=True
+            )
+            
+            with gr.Row():
+                clear_leads_btn = gr.Button("Effacer", variant="secondary")
+                submit_leads_btn = gr.Button("Créer les leads", variant="primary")
+            
+            leads_output = gr.JSON(label="IDs des leads créés")
+            
+            # Example button
+            example_leads_btn = gr.Button("📋 Charger un exemple", variant="secondary")
+            
+            def load_example_leads():
+                return '''[
+  {
+    "name": "Prospect - Entreprise TechCorp",
+    "partner_name": "TechCorp Solutions",
+    "email_from": "contact@techcorp.com",
+    "phone": "+33 1 23 45 67 89",
+    "description": "Entreprise de 50 employés spécialisée dans le développement logiciel.",
+    "expected_revenue": 15000.0,
+    "probability": 60,
+    "user_id": 1
+  },
+  {
+    "name": "Lead - Startup InnovateLab",
+    "partner_name": "InnovateLab",
+    "email_from": "ceo@innovatelab.fr",
+    "phone": "+33 6 78 90 12 34",
+    "description": "Startup en phase de croissance dans l'IoT.",
+    "expected_revenue": 8500.0,
+    "probability": 40,
+    "user_id": 1
+  }
+]'''
+            
+            def process_leads(leads_json):
+                try:
+                    import json
+                    leads_data = json.loads(leads_json) if isinstance(leads_json, str) else leads_json
+                    return ingest_prospects(leads_data)
+                except json.JSONDecodeError:
+                    return {"error": "Format JSON invalide"}
+                except Exception as e:
+                    return {"error": f"Erreur: {str(e)}"}
+            
+            example_leads_btn.click(load_example_leads, outputs=leads_input)
+            clear_leads_btn.click(lambda: "", outputs=leads_input)
+            submit_leads_btn.click(process_leads, inputs=leads_input, outputs=leads_output)
+        
         # Qualify Lead
-        gr.Interface(
-            fn=qualify_lead,
-            inputs=gr.Number(label="Lead ID", precision=0),
-            outputs=gr.Text(label="Summary & Score"),
-            title="Qualify Lead",
-        )
+        with gr.Group():
+            gr.Markdown("### 🔍 Qualify Lead")
+            gr.Markdown("Analyser un lead avec l'IA et obtenir un score d'intérêt")
+            
+            with gr.Row():
+                qualify_lead_id = gr.Number(label="Lead ID", precision=0, value=0)
+                qualify_btn = gr.Button("Analyser le lead", variant="primary")
+            
+            qualify_output = gr.Textbox(label="Analyse et score", lines=5, interactive=False)
+            
+            qualify_btn.click(qualify_lead, inputs=qualify_lead_id, outputs=qualify_output)
+        
         # Generate Offer
-        gr.Interface(
-            fn=generate_offer,
-            inputs=[
-                gr.Number(label="Lead ID", precision=0),
-                gr.Dropdown(label="Tone", choices=["formel", "vendeur", "technique"], value="formel")
-            ],
-            outputs=gr.Text(label="Proposal Email"),
-            title="Generate Offer",
-        )
+        with gr.Group():
+            gr.Markdown("### 📧 Generate Offer")
+            gr.Markdown("Générer une proposition commerciale personnalisée")
+            
+            with gr.Row():
+                offer_lead_id = gr.Number(label="Lead ID", precision=0, value=0)
+                offer_tone = gr.Dropdown(
+                    label="Tone", 
+                    choices=["formel", "vendeur", "technique"], 
+                    value="formel"
+                )
+                generate_btn = gr.Button("Générer l'offre", variant="primary")
+            
+            offer_output = gr.Textbox(label="Proposition générée", lines=8, interactive=False)
+            
+            generate_btn.click(generate_offer, inputs=[offer_lead_id, offer_tone], outputs=offer_output)
+        
         # Summarize Opportunity
-        gr.Interface(
-            fn=summarize_opportunity,
-            inputs=gr.Number(label="Lead ID", precision=0),
-            outputs=gr.Text(label="Opportunity Summary"),
-            title="Summarize Opportunity",
-        )
+        with gr.Group():
+            gr.Markdown("### 📊 Summarize Opportunity")
+            gr.Markdown("Obtenir un résumé de l'état d'une opportunité")
+            
+            with gr.Row():
+                summary_lead_id = gr.Number(label="Lead ID", precision=0, value=0)
+                summary_btn = gr.Button("Résumer l'opportunité", variant="primary")
+            
+            summary_output = gr.Textbox(label="Résumé de l'opportunité", lines=3, interactive=False)
+            
+            summary_btn.click(summarize_opportunity, inputs=summary_lead_id, outputs=summary_output)
 
 # Launch as MCP Server
 if __name__ == "__main__":
