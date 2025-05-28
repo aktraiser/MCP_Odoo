@@ -150,26 +150,34 @@ def ingest_prospects_from_json(prospects_json: str):
             return "Aucun prospect fourni"
         
         created_ids = []
+        errors = []
         
         for i, prospect in enumerate(prospects):
             try:
+                # Nettoyer les données du prospect
+                cleaned_prospect = clean_prospect_data(prospect)
+                
                 # Créer le lead dans Odoo
-                lead_id = odoo.env['crm.lead'].create(prospect)
+                lead_id = odoo.env['crm.lead'].create(cleaned_prospect)
                 
                 # Vérifier que le lead a bien été créé
                 created_lead = odoo.env['crm.lead'].read([lead_id], ['name'])
                 if created_lead:
                     created_ids.append(lead_id)
                 else:
-                    return f"Prospect {i+1} créé mais non trouvé lors de la vérification"
+                    errors.append(f"Prospect {i+1} créé mais non trouvé lors de la vérification")
                 
             except Exception as e:
-                return f"Erreur lors de la création du prospect {i+1}: {str(e)}"
+                errors.append(f"Prospect {i+1} ('{prospect.get('name', 'Sans nom')}'): {str(e)}")
         
-        return f"✅ {len(created_ids)} prospects créés avec succès ! IDs: {created_ids}"
+        result = f"✅ {len(created_ids)} prospects créés avec succès ! IDs: {created_ids}"
+        if errors:
+            result += f"\n\n❌ Erreurs rencontrées:\n" + "\n".join(errors)
         
-    except json.JSONDecodeError:
-        return "Erreur: JSON invalide"
+        return result
+        
+    except json.JSONDecodeError as e:
+        return f"Erreur: JSON invalide - {str(e)}"
     except Exception as e:
         return f"Erreur générale: {str(e)}"
 
@@ -198,6 +206,72 @@ def configure_odoo(url: str, db: str, login: str, password: str):
             
     except Exception as e:
         return f"Erreur lors de la configuration: {str(e)}"
+
+def process_uploaded_file(file):
+    """
+    Traiter un fichier JSON uploadé par l'utilisateur
+    
+    Args:
+        file: Objet fichier Gradio uploadé
+        
+    Returns:
+        str: Contenu JSON du fichier ou message d'erreur
+    """
+    if not file:
+        return "Aucun fichier sélectionné"
+    
+    try:
+        with open(file.name, 'r', encoding='utf-8') as f:
+            content = f.read()
+        
+        # Valider que c'est du JSON valide
+        json.loads(content)
+        
+        return content
+    except json.JSONDecodeError:
+        return "Erreur: Le fichier n'est pas un JSON valide"
+    except Exception as e:
+        return f"Erreur lors de la lecture du fichier: {str(e)}"
+
+def load_example_leads():
+    """
+    Charger le fichier d'exemple de leads
+    
+    Returns:
+        str: Contenu JSON du fichier d'exemple
+    """
+    try:
+        with open('example_leads.json', 'r', encoding='utf-8') as f:
+            content = f.read()
+        return content
+    except Exception as e:
+        return f"Erreur lors du chargement du fichier d'exemple: {str(e)}"
+
+def clean_prospect_data(prospect: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    Nettoyer les données d'un prospect pour éviter les erreurs Odoo
+    
+    Args:
+        prospect: Données brutes du prospect
+        
+    Returns:
+        Dict: Données nettoyées
+    """
+    # Champs autorisés pour la création de leads
+    allowed_fields = {
+        'name', 'partner_name', 'email_from', 'phone', 'description', 
+        'expected_revenue', 'probability', 'street', 'city', 'zip', 
+        'country_id', 'state_id', 'website', 'mobile'
+    }
+    
+    # Filtrer les champs autorisés
+    cleaned = {k: v for k, v in prospect.items() if k in allowed_fields}
+    
+    # S'assurer que le nom est présent
+    if 'name' not in cleaned or not cleaned['name']:
+        cleaned['name'] = f"Lead importé - {cleaned.get('partner_name', 'Sans nom')}"
+    
+    return cleaned
 
 # Créer l'interface Gradio avec les outils MCP
 with gr.Blocks(title="MCP Odoo CRM", theme=gr.themes.Soft()) as demo:
@@ -250,16 +324,39 @@ with gr.Blocks(title="MCP Odoo CRM", theme=gr.themes.Soft()) as demo:
     
     with gr.Tab("📥 Import JSON"):
         gr.Markdown("### Importer plusieurs prospects depuis JSON")
+        gr.Markdown("**Option 1:** Chargez un fichier JSON depuis votre ordinateur")
+        
+        with gr.Row():
+            file_upload = gr.File(
+                label="Fichier JSON", 
+                file_types=[".json"],
+                file_count="single"
+            )
+            load_example_btn = gr.Button("📁 Charger l'exemple", variant="secondary")
+        
+        gr.Markdown("**Option 2:** Collez directement le JSON dans la zone de texte")
         gr.Markdown("Format attendu: `[{\"name\": \"Lead 1\", \"partner_name\": \"Company 1\", \"email_from\": \"email1@example.com\"}, ...]`")
         
         json_input = gr.Textbox(
             label="JSON des prospects", 
-            lines=10,
+            lines=15,
             placeholder='[{"name": "Lead 1", "partner_name": "Company 1", "email_from": "email1@example.com"}]'
         )
         
         import_btn = gr.Button("Importer les prospects", variant="primary")
-        import_output = gr.Textbox(label="Résultat", lines=5)
+        import_output = gr.Textbox(label="Résultat", lines=8)
+        
+        # Connecter les événements
+        file_upload.upload(
+            process_uploaded_file,
+            inputs=file_upload,
+            outputs=json_input
+        )
+        
+        load_example_btn.click(
+            load_example_leads,
+            outputs=json_input
+        )
         
         import_btn.click(
             ingest_prospects_from_json,
