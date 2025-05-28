@@ -1,13 +1,28 @@
-gradio[mcp]>=4.44.1
+# Gradio avec support MCP
+gradio[mcp]>=4.44.0
+
+# Connecteur Odoo
+xmlrpc
+
+# Utilitaires
+python-dotenv
+pydantic>=2.0.0
+typing-extensions
+
+# Logging et debugging
+colorlog
+
+# Serveur web
+uvicorn
+fastapi
+
+# Optionnel pour les clients MCP
+anthropic
+mcp
+
 odoorpc>=0.10.0
 openai>=1.0.0
-python-dotenv>=1.0.0
-pandas>=2.0.0
 requests>=2.31.0
-typing-extensions>=4.0.0
-pydantic>=2.0.0
 fastmcp>=2.5.1
 websockets>=14.0
-starlette>=0.41.3
-fastapi>=0.115.0
-uvicorn>=0.30.0 
+starlette>=0.41.3 

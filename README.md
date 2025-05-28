@@ -1,33 +1,98 @@
 ---
-title: MCP Odoo CRM
-emoji: 🏢
+title: MCP Odoo CRM Server
+emoji: 🚀
 colorFrom: blue
 colorTo: green
 sdk: gradio
-sdk_version: 4.44.0
+sdk_version: "4.44.0"
 app_file: app.py
 pinned: false
 license: mit
 ---
 
-# MCP Odoo CRM 🏢
+# 🚀 MCP Odoo CRM Server
 
-Une application **Model Context Protocol (MCP)** pour intégrer et gérer un système CRM Odoo via une interface Gradio moderne.
+Un serveur MCP (Model Context Protocol) avec Gradio pour la gestion CRM Odoo.
 
-## 🚀 Fonctionnalités
+## 🎯 Fonctionnalités
 
-### 🔧 Serveur MCP
-- **Connexion Odoo** : Diagnostic et gestion de la connexion à votre instance Odoo
-- **Gestion des Leads** : Création et ingestion de prospects en lot
-- **Qualification IA** : Analyse automatique des leads avec OpenAI
-- **Propositions commerciales** : Génération d'emails personnalisés
-- **Ressources MCP** : Accès aux données CRM via le protocole MCP
+Ce serveur MCP expose 4 outils pour interagir avec Odoo CRM :
 
-### 🎨 Interface Gradio
-- **Configuration intuitive** : Paramétrage facile de la connexion Odoo
-- **Tableau de bord CRM** : Visualisation et gestion des leads
-- **Import en lot** : Chargement de fichiers CSV/Excel
-- **Génération de contenu** : Outils IA intégrés
+- **`test_odoo_connection`** - Teste et établit la connexion à Odoo
+- **`create_odoo_lead`** - Crée un nouveau lead dans Odoo CRM  
+- **`get_odoo_leads`** - Récupère la liste des leads depuis Odoo
+- **`get_connection_status`** - Vérifie le statut de la connexion
+
+## 🔗 Utilisation avec les Clients MCP
+
+### Endpoint MCP SSE
+```
+https://votre-space.hf.space/gradio_api/mcp/sse
+```
+
+### Configuration pour Cursor
+```json
+{
+  "mcpServers": {
+    "odoo-crm": {
+      "url": "https://votre-space.hf.space/gradio_api/mcp/sse"
+    }
+  }
+}
+```
+
+### Configuration pour Claude Desktop
+```json
+{
+  "mcpServers": {
+    "odoo-crm": {
+      "command": "npx",
+      "args": [
+        "mcp-remote",
+        "https://votre-space.hf.space/gradio_api/mcp/sse",
+        "--transport",
+        "sse-only"
+      ]
+    }
+  }
+}
+```
+
+## 📖 Exemples d'utilisation
+
+Une fois configuré dans votre client MCP :
+
+1. **Connecter à Odoo** :
+   ```
+   Connecte-toi à mon instance Odoo avec l'URL https://mon-odoo.com, 
+   base de données "production", utilisateur "admin" et mot de passe "monmotdepasse"
+   ```
+
+2. **Créer un lead** :
+   ```
+   Crée un lead pour l'entreprise "TechCorp" avec le contact "Jean Dupont", 
+   email "jean@techcorp.com" et revenus attendus de 5000€
+   ```
+
+3. **Lister les leads** :
+   ```
+   Récupère les 10 derniers leads de mon CRM Odoo
+   ```
+
+## 🛠️ Développement Local
+
+```bash
+git clone https://huggingface.co/spaces/votre-username/mcp-odoo-crm
+cd mcp-odoo-crm
+pip install -r requirements.txt
+python app.py
+```
+
+## 📚 Documentation
+
+- [Model Context Protocol](https://modelcontextprotocol.io/)
+- [Documentation Gradio MCP](https://www.gradio.app/guides/building-mcp-server-with-gradio)
+- [API Odoo](https://www.odoo.com/documentation/17.0/developer/reference/external_api.html)
 
 ## 🛠️ Technologies
 
