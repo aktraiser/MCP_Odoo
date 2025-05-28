@@ -369,7 +369,7 @@ def main():
     """Point d'entrée principal pour Hugging Face Spaces"""
     print("🚀 Lancement de l'application MCP Odoo CRM...")
     
-    # Activer le serveur MCP via variable d'environnement
+    # Réactiver le serveur MCP avec les corrections de schéma
     os.environ["GRADIO_MCP_SERVER"] = "True"
     
     # Lancer l'application

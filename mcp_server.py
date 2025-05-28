@@ -124,38 +124,38 @@ class LeadData(BaseModel):
     """Données pour créer un lead CRM"""
     
     name: str = Field(description="Nom du lead (requis)")
-    partner_name: Optional[str] = Field(default=None, description="Nom de l'entreprise")
-    email_from: Optional[str] = Field(default=None, description="Email du contact")
-    phone: Optional[str] = Field(default=None, description="Téléphone du contact")
-    description: Optional[str] = Field(default=None, description="Description du lead")
-    expected_revenue: Optional[float] = Field(default=None, description="Revenus attendus")
-    probability: Optional[float] = Field(default=None, description="Probabilité de succès (0-100)")
-    user_id: Optional[int] = Field(default=None, description="ID de l'utilisateur assigné")
+    partner_name: Optional[str] = Field(default="", description="Nom de l'entreprise")
+    email_from: Optional[str] = Field(default="", description="Email du contact")
+    phone: Optional[str] = Field(default="", description="Téléphone du contact")
+    description: Optional[str] = Field(default="", description="Description du lead")
+    expected_revenue: Optional[float] = Field(default=0.0, description="Revenus attendus")
+    probability: Optional[float] = Field(default=0.0, description="Probabilité de succès (0-100)")
+    user_id: Optional[int] = Field(default=1, description="ID de l'utilisateur assigné")
 
 
 class CreateLeadResponse(BaseModel):
     """Réponse pour la création de lead"""
     
-    success: bool = Field(description="Indique si la création a réussi")
+    status: str = Field(description="Statut de l'opération: success ou error")
     lead_id: Optional[int] = Field(default=None, description="ID du lead créé")
-    error: Optional[str] = Field(default=None, description="Message d'erreur, le cas échéant")
+    message: str = Field(description="Message de résultat ou d'erreur")
 
 
 class IngestProspectsResponse(BaseModel):
     """Réponse pour l'ingestion de prospects"""
     
-    success: bool = Field(description="Indique si l'ingestion a réussi")
-    created_ids: Optional[List[int]] = Field(default=None, description="Liste des IDs créés")
-    count: Optional[int] = Field(default=None, description="Nombre de leads créés")
-    error: Optional[str] = Field(default=None, description="Message d'erreur, le cas échéant")
+    status: str = Field(description="Statut de l'opération: success ou error")
+    created_ids: Optional[List[int]] = Field(default=[], description="Liste des IDs créés")
+    count: int = Field(default=0, description="Nombre de leads créés")
+    message: str = Field(description="Message de résultat ou d'erreur")
 
 
 class QualifyLeadResponse(BaseModel):
     """Réponse pour la qualification de lead"""
     
-    success: bool = Field(description="Indique si la qualification a réussi")
-    analysis: Optional[str] = Field(default=None, description="Analyse du lead")
-    error: Optional[str] = Field(default=None, description="Message d'erreur, le cas échéant")
+    status: str = Field(description="Statut de l'opération: success ou error")
+    analysis: str = Field(default="", description="Analyse du lead ou message d'erreur")
+    message: str = Field(description="Message de résultat")
 
 
 # ----- Outils MCP -----
@@ -179,7 +179,7 @@ def diagnose_odoo_connection(ctx: Context) -> QualifyLeadResponse:
             error_msg += "ODOO_DB=nom-de-votre-base\n"
             error_msg += "ODOO_LOGIN=votre-nom-utilisateur\n"
             error_msg += "ODOO_PASSWORD=votre-mot-de-passe"
-            return QualifyLeadResponse(success=False, error=error_msg)
+            return QualifyLeadResponse(status="error", analysis=error_msg)
         
         # Vérifier la connexion
         connection_status = odoo_connector.get_status()
@@ -190,13 +190,13 @@ def diagnose_odoo_connection(ctx: Context) -> QualifyLeadResponse:
             reconnect_success = odoo_connector.reconnect()
             if reconnect_success:
                 analysis = f"✅ Reconnexion réussie !\nStatut: {odoo_connector.get_status()}"
-                return QualifyLeadResponse(success=True, analysis=analysis)
+                return QualifyLeadResponse(status="success", analysis=analysis)
             else:
                 error_msg = f"❌ Connexion Odoo échouée\nStatut: {connection_status}\n"
                 error_msg += f"URL configurée: {config.odoo_url}\n"
                 error_msg += f"Base de données: {config.odoo_db}\n"
                 error_msg += f"Utilisateur: {config.odoo_login}"
-                return QualifyLeadResponse(success=False, error=error_msg)
+                return QualifyLeadResponse(status="error", analysis=error_msg)
         
         # Tester l'accès aux leads
         try:
@@ -207,15 +207,15 @@ def diagnose_odoo_connection(ctx: Context) -> QualifyLeadResponse:
             analysis += f"URL: {config.odoo_url}\n"
             analysis += f"Base de données: {config.odoo_db}\n"
             analysis += f"Utilisateur: {config.odoo_login}"
-            return QualifyLeadResponse(success=True, analysis=analysis)
+            return QualifyLeadResponse(status="success", analysis=analysis)
         except Exception as e:
             error_msg = f"❌ Connexion établie mais erreur d'accès aux données\n"
             error_msg += f"Erreur: {str(e)}\n"
             error_msg += "Vérifiez les droits d'accès de l'utilisateur"
-            return QualifyLeadResponse(success=False, error=error_msg)
+            return QualifyLeadResponse(status="error", analysis=error_msg)
             
     except Exception as e:
-        return QualifyLeadResponse(success=False, error=f"Erreur de diagnostic: {str(e)}")
+        return QualifyLeadResponse(status="error", analysis=f"Erreur de diagnostic: {str(e)}")
 
 
 @mcp.tool(description="Créer un nouveau lead dans le CRM Odoo")
@@ -236,7 +236,7 @@ def create_lead(
     if not config.is_odoo_configured():
         missing_vars = config.get_missing_odoo_vars()
         error_msg = f"Configuration Odoo incomplète. Variables manquantes: {', '.join(missing_vars)}"
-        return CreateLeadResponse(success=False, error=error_msg)
+        return CreateLeadResponse(status="error", message=error_msg)
     
     odoo = odoo_connector.get_odoo_instance()
     if not odoo:
@@ -244,7 +244,7 @@ def create_lead(
         reconnect_success = odoo_connector.reconnect()
         if not reconnect_success:
             error_msg = f"Connexion Odoo échouée. Statut: {odoo_connector.get_status()}"
-            return CreateLeadResponse(success=False, error=error_msg)
+            return CreateLeadResponse(status="error", message=error_msg)
         odoo = odoo_connector.get_odoo_instance()
     
     try:
@@ -257,13 +257,13 @@ def create_lead(
         # Vérifier que le lead a bien été créé
         created_lead = odoo.env['crm.lead'].read([lead_id], ['name'])
         if not created_lead:
-            return CreateLeadResponse(success=False, error="Lead créé mais non trouvé lors de la vérification")
+            return CreateLeadResponse(status="error", message="Lead créé mais non trouvé lors de la vérification")
         
-        return CreateLeadResponse(success=True, lead_id=lead_id)
+        return CreateLeadResponse(status="success", lead_id=lead_id)
         
     except Exception as e:
         error_msg = f"Erreur lors de la création du lead: {str(e)}"
-        return CreateLeadResponse(success=False, error=error_msg)
+        return CreateLeadResponse(status="error", message=error_msg)
 
 
 @mcp.tool(description="Ingérer plusieurs prospects dans le CRM Odoo")
@@ -284,7 +284,7 @@ def ingest_prospects(
     if not config.is_odoo_configured():
         missing_vars = config.get_missing_odoo_vars()
         error_msg = f"Configuration Odoo incomplète. Variables manquantes: {', '.join(missing_vars)}"
-        return IngestProspectsResponse(success=False, error=error_msg)
+        return IngestProspectsResponse(status="error", message=error_msg)
     
     odoo = odoo_connector.get_odoo_instance()
     if not odoo:
@@ -292,11 +292,11 @@ def ingest_prospects(
         reconnect_success = odoo_connector.reconnect()
         if not reconnect_success:
             error_msg = f"Connexion Odoo échouée. Statut: {odoo_connector.get_status()}"
-            return IngestProspectsResponse(success=False, error=error_msg)
+            return IngestProspectsResponse(status="error", message=error_msg)
         odoo = odoo_connector.get_odoo_instance()
     
     if not prospects:
-        return IngestProspectsResponse(success=False, error="Aucun prospect fourni")
+        return IngestProspectsResponse(status="error", message="Aucun prospect fourni")
     
     try:
         created_ids = []
@@ -315,24 +315,24 @@ def ingest_prospects(
                     created_ids.append(lead_id)
                 else:
                     return IngestProspectsResponse(
-                        success=False, 
-                        error=f"Prospect {i+1} créé mais non trouvé lors de la vérification"
+                        status="error", 
+                        message=f"Prospect {i+1} créé mais non trouvé lors de la vérification"
                     )
                 
             except Exception as e:
                 return IngestProspectsResponse(
-                    success=False, 
-                    error=f"Erreur lors de la création du prospect {i+1} ('{prospect.name}'): {str(e)}"
+                    status="error", 
+                    message=f"Erreur lors de la création du prospect {i+1} ('{prospect.name}'): {str(e)}"
                 )
         
         return IngestProspectsResponse(
-            success=True, 
+            status="success", 
             created_ids=created_ids, 
             count=len(created_ids)
         )
         
     except Exception as e:
-        return IngestProspectsResponse(success=False, error=f"Erreur générale: {str(e)}")
+        return IngestProspectsResponse(status="error", message=f"Erreur générale: {str(e)}")
 
 
 @mcp.tool(description="Qualifier un lead avec l'IA")
@@ -351,15 +351,15 @@ def qualify_lead(
     """
     odoo = odoo_connector.get_odoo_instance()
     if not odoo:
-        return QualifyLeadResponse(success=False, error="Connexion Odoo non disponible")
+        return QualifyLeadResponse(status="error", analysis="Connexion Odoo non disponible")
     
     if not config.is_openai_configured():
-        return QualifyLeadResponse(success=False, error="Clé OpenAI non configurée")
+        return QualifyLeadResponse(status="error", analysis="Clé OpenAI non configurée")
     
     try:
         # Vérifier que le lead existe
         if not lead_id or lead_id <= 0:
-            return QualifyLeadResponse(success=False, error="ID de lead invalide")
+            return QualifyLeadResponse(status="error", analysis="ID de lead invalide")
             
         lead = odoo.env['crm.lead'].read([lead_id], [
             'name', 'email_from', 'description', 'partner_name', 'phone'
@@ -367,8 +367,8 @@ def qualify_lead(
         
         if not lead:
             return QualifyLeadResponse(
-                success=False, 
-                error=f"Aucun lead trouvé avec l'ID {lead_id}"
+                status="error", 
+                analysis=f"Aucun lead trouvé avec l'ID {lead_id}"
             )
             
         lead = lead[0]
@@ -393,10 +393,10 @@ def qualify_lead(
         
         analysis = resp.choices[0].message.content
         
-        return QualifyLeadResponse(success=True, analysis=analysis)
+        return QualifyLeadResponse(status="success", analysis=analysis)
         
     except Exception as e:
-        return QualifyLeadResponse(success=False, error=str(e))
+        return QualifyLeadResponse(status="error", analysis=str(e))
 
 
 @mcp.tool(description="Générer une proposition commerciale pour un lead")
@@ -417,15 +417,15 @@ def generate_offer(
     """
     odoo = odoo_connector.get_odoo_instance()
     if not odoo:
-        return QualifyLeadResponse(success=False, error="Connexion Odoo non disponible")
+        return QualifyLeadResponse(status="error", analysis="Connexion Odoo non disponible")
     
     if not config.is_openai_configured():
-        return QualifyLeadResponse(success=False, error="Clé OpenAI non configurée")
+        return QualifyLeadResponse(status="error", analysis="Clé OpenAI non configurée")
     
     try:
         # Vérifier que le lead existe
         if not lead_id or lead_id <= 0:
-            return QualifyLeadResponse(success=False, error="ID de lead invalide")
+            return QualifyLeadResponse(status="error", analysis="ID de lead invalide")
             
         lead = odoo.env['crm.lead'].read([lead_id], [
             'name', 'partner_name', 'email_from', 'description'
@@ -433,8 +433,8 @@ def generate_offer(
         
         if not lead:
             return QualifyLeadResponse(
-                success=False, 
-                error=f"Aucun lead trouvé avec l'ID {lead_id}"
+                status="error", 
+                analysis=f"Aucun lead trouvé avec l'ID {lead_id}"
             )
             
         lead = lead[0]
@@ -456,10 +456,10 @@ def generate_offer(
         
         offer = resp.choices[0].message.content
         
-        return QualifyLeadResponse(success=True, analysis=offer)
+        return QualifyLeadResponse(status="success", analysis=offer)
         
     except Exception as e:
-        return QualifyLeadResponse(success=False, error=str(e))
+        return QualifyLeadResponse(status="error", analysis=str(e))
 
 
 @mcp.tool(description="Résumer le statut d'une opportunité")
@@ -478,12 +478,12 @@ def summarize_opportunity(
     """
     odoo = odoo_connector.get_odoo_instance()
     if not odoo:
-        return QualifyLeadResponse(success=False, error="Connexion Odoo non disponible")
+        return QualifyLeadResponse(status="error", analysis="Connexion Odoo non disponible")
     
     try:
         # Vérifier que le lead existe
         if not lead_id or lead_id <= 0:
-            return QualifyLeadResponse(success=False, error="ID de lead invalide")
+            return QualifyLeadResponse(status="error", analysis="ID de lead invalide")
             
         opp = odoo.env['crm.lead'].read([lead_id], [
             'name', 'probability', 'stage_id', 'expected_revenue'
@@ -491,8 +491,8 @@ def summarize_opportunity(
         
         if not opp:
             return QualifyLeadResponse(
-                success=False, 
-                error=f"Aucune opportunité trouvée avec l'ID {lead_id}"
+                status="error", 
+                analysis=f"Aucune opportunité trouvée avec l'ID {lead_id}"
             )
             
         opp = opp[0]
@@ -505,10 +505,10 @@ def summarize_opportunity(
             f"Revenus attendus: {opp.get('expected_revenue', 0)} €"
         )
         
-        return QualifyLeadResponse(success=True, analysis=summary)
+        return QualifyLeadResponse(status="success", analysis=summary)
         
     except Exception as e:
-        return QualifyLeadResponse(success=False, error=str(e))
+        return QualifyLeadResponse(status="error", analysis=str(e))
 
 
 if __name__ == "__main__":
