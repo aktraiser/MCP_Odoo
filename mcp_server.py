@@ -161,6 +161,63 @@ class QualifyLeadResponse(BaseModel):
 # ----- Outils MCP -----
 
 
+@mcp.tool(description="Diagnostiquer la connexion Odoo et afficher le statut")
+def diagnose_odoo_connection(ctx: Context) -> QualifyLeadResponse:
+    """
+    Diagnostiquer la connexion Odoo et afficher des informations détaillées
+
+    Returns:
+        QualifyLeadResponse: Statut de la connexion et diagnostic
+    """
+    try:
+        # Vérifier la configuration
+        if not config.is_odoo_configured():
+            missing_vars = config.get_missing_odoo_vars()
+            error_msg = f"Configuration Odoo incomplète. Variables manquantes: {', '.join(missing_vars)}\n"
+            error_msg += "Créez un fichier .env avec les variables suivantes:\n"
+            error_msg += "ODOO_URL=votre-instance-odoo.com\n"
+            error_msg += "ODOO_DB=nom-de-votre-base\n"
+            error_msg += "ODOO_LOGIN=votre-nom-utilisateur\n"
+            error_msg += "ODOO_PASSWORD=votre-mot-de-passe"
+            return QualifyLeadResponse(success=False, error=error_msg)
+        
+        # Vérifier la connexion
+        connection_status = odoo_connector.get_status()
+        odoo_instance = odoo_connector.get_odoo_instance()
+        
+        if not odoo_instance:
+            # Tenter une reconnexion
+            reconnect_success = odoo_connector.reconnect()
+            if reconnect_success:
+                analysis = f"✅ Reconnexion réussie !\nStatut: {odoo_connector.get_status()}"
+                return QualifyLeadResponse(success=True, analysis=analysis)
+            else:
+                error_msg = f"❌ Connexion Odoo échouée\nStatut: {connection_status}\n"
+                error_msg += f"URL configurée: {config.odoo_url}\n"
+                error_msg += f"Base de données: {config.odoo_db}\n"
+                error_msg += f"Utilisateur: {config.odoo_login}"
+                return QualifyLeadResponse(success=False, error=error_msg)
+        
+        # Tester l'accès aux leads
+        try:
+            lead_count = odoo_instance.env['crm.lead'].search_count([])
+            analysis = f"✅ Connexion Odoo active\n"
+            analysis += f"Statut: {connection_status}\n"
+            analysis += f"Nombre de leads dans la base: {lead_count}\n"
+            analysis += f"URL: {config.odoo_url}\n"
+            analysis += f"Base de données: {config.odoo_db}\n"
+            analysis += f"Utilisateur: {config.odoo_login}"
+            return QualifyLeadResponse(success=True, analysis=analysis)
+        except Exception as e:
+            error_msg = f"❌ Connexion établie mais erreur d'accès aux données\n"
+            error_msg += f"Erreur: {str(e)}\n"
+            error_msg += "Vérifiez les droits d'accès de l'utilisateur"
+            return QualifyLeadResponse(success=False, error=error_msg)
+            
+    except Exception as e:
+        return QualifyLeadResponse(success=False, error=f"Erreur de diagnostic: {str(e)}")
+
+
 @mcp.tool(description="Créer un nouveau lead dans le CRM Odoo")
 def create_lead(
     ctx: Context,
@@ -175,21 +232,38 @@ def create_lead(
     Returns:
         CreateLeadResponse: Résultat de la création
     """
+    # Vérifier la configuration Odoo
+    if not config.is_odoo_configured():
+        missing_vars = config.get_missing_odoo_vars()
+        error_msg = f"Configuration Odoo incomplète. Variables manquantes: {', '.join(missing_vars)}"
+        return CreateLeadResponse(success=False, error=error_msg)
+    
     odoo = odoo_connector.get_odoo_instance()
     if not odoo:
-        return CreateLeadResponse(success=False, error="Connexion Odoo non disponible")
+        # Tenter une reconnexion
+        reconnect_success = odoo_connector.reconnect()
+        if not reconnect_success:
+            error_msg = f"Connexion Odoo échouée. Statut: {odoo_connector.get_status()}"
+            return CreateLeadResponse(success=False, error=error_msg)
+        odoo = odoo_connector.get_odoo_instance()
     
     try:
         # Convertir les données Pydantic en dictionnaire
         lead_dict = lead_data.model_dump(exclude_none=True)
         
-        # Créer le lead
+        # Créer le lead dans Odoo
         lead_id = odoo.env['crm.lead'].create(lead_dict)
+        
+        # Vérifier que le lead a bien été créé
+        created_lead = odoo.env['crm.lead'].read([lead_id], ['name'])
+        if not created_lead:
+            return CreateLeadResponse(success=False, error="Lead créé mais non trouvé lors de la vérification")
         
         return CreateLeadResponse(success=True, lead_id=lead_id)
         
     except Exception as e:
-        return CreateLeadResponse(success=False, error=str(e))
+        error_msg = f"Erreur lors de la création du lead: {str(e)}"
+        return CreateLeadResponse(success=False, error=error_msg)
 
 
 @mcp.tool(description="Ingérer plusieurs prospects dans le CRM Odoo")
@@ -206,9 +280,20 @@ def ingest_prospects(
     Returns:
         IngestProspectsResponse: Résultat de l'ingestion
     """
+    # Vérifier la configuration Odoo
+    if not config.is_odoo_configured():
+        missing_vars = config.get_missing_odoo_vars()
+        error_msg = f"Configuration Odoo incomplète. Variables manquantes: {', '.join(missing_vars)}"
+        return IngestProspectsResponse(success=False, error=error_msg)
+    
     odoo = odoo_connector.get_odoo_instance()
     if not odoo:
-        return IngestProspectsResponse(success=False, error="Connexion Odoo non disponible")
+        # Tenter une reconnexion
+        reconnect_success = odoo_connector.reconnect()
+        if not reconnect_success:
+            error_msg = f"Connexion Odoo échouée. Statut: {odoo_connector.get_status()}"
+            return IngestProspectsResponse(success=False, error=error_msg)
+        odoo = odoo_connector.get_odoo_instance()
     
     if not prospects:
         return IngestProspectsResponse(success=False, error="Aucun prospect fourni")
@@ -221,14 +306,23 @@ def ingest_prospects(
                 # Convertir les données Pydantic en dictionnaire
                 prospect_dict = prospect.model_dump(exclude_none=True)
                 
-                # Créer le lead
+                # Créer le lead dans Odoo
                 lead_id = odoo.env['crm.lead'].create(prospect_dict)
-                created_ids.append(lead_id)
+                
+                # Vérifier que le lead a bien été créé
+                created_lead = odoo.env['crm.lead'].read([lead_id], ['name'])
+                if created_lead:
+                    created_ids.append(lead_id)
+                else:
+                    return IngestProspectsResponse(
+                        success=False, 
+                        error=f"Prospect {i+1} créé mais non trouvé lors de la vérification"
+                    )
                 
             except Exception as e:
                 return IngestProspectsResponse(
                     success=False, 
-                    error=f"Erreur lors de la création du prospect {i+1}: {str(e)}"
+                    error=f"Erreur lors de la création du prospect {i+1} ('{prospect.name}'): {str(e)}"
                 )
         
         return IngestProspectsResponse(
@@ -238,7 +332,7 @@ def ingest_prospects(
         )
         
     except Exception as e:
-        return IngestProspectsResponse(success=False, error=str(e))
+        return IngestProspectsResponse(success=False, error=f"Erreur générale: {str(e)}")
 
 
 @mcp.tool(description="Qualifier un lead avec l'IA")
