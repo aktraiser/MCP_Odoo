@@ -369,13 +369,15 @@ def main():
     """Point d'entrée principal pour Hugging Face Spaces"""
     print("🚀 Lancement de l'application MCP Odoo CRM...")
     
-    # Lancer l'application avec le serveur MCP activé
+    # Activer le serveur MCP via variable d'environnement
+    os.environ["GRADIO_MCP_SERVER"] = "True"
+    
+    # Lancer l'application
     demo.launch(
         server_name="0.0.0.0",
         server_port=7860,
         share=True,  # Activer le partage pour Hugging Face Spaces
-        debug=False,
-        mcp_server=True  # Activer le serveur MCP natif de Gradio
+        debug=False
     )
 
 if __name__ == "__main__":
