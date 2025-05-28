@@ -1,32 +1,31 @@
 """
-Serveur MCP basé sur Gradio pour Agent CRM
-Point d'entrée principal de l'application
+Application Gradio pour MCP Odoo CRM
+Point d'entrée principal pour Hugging Face Spaces
 """
 
+import gradio as gr
 import sys
-import argparse
+import os
+
+# Ajouter le répertoire racine au path pour les imports
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+
+from ui.gradio_app import create_gradio_interface
 
 def main():
-    parser = argparse.ArgumentParser(description="Agent CRM - Serveur MCP et Interface Gradio")
-    parser.add_argument(
-        "--mode", 
-        choices=["gradio", "mcp"], 
-        default="gradio",
-        help="Mode de lancement: 'gradio' pour l'interface web, 'mcp' pour le serveur MCP"
+    """Point d'entrée principal pour Hugging Face Spaces"""
+    print("🚀 Lancement de l'application MCP Odoo CRM...")
+    
+    # Créer l'interface Gradio
+    app = create_gradio_interface()
+    
+    # Lancer l'application
+    app.launch(
+        server_name="0.0.0.0",
+        server_port=7860,
+        share=False,
+        debug=False
     )
-    
-    args = parser.parse_args()
-    
-    if args.mode == "mcp":
-        # Lancer le serveur MCP
-        print("🚀 Lancement du serveur MCP...")
-        from mcp_server import mcp
-        mcp.run()
-    else:
-        # Lancer l'interface Gradio (mode par défaut)
-        print("🚀 Lancement de l'interface Gradio...")
-        from ui.gradio_app import launch_app
-        launch_app()
 
 if __name__ == "__main__":
     main() 

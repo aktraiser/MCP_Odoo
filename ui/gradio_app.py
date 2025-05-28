@@ -16,6 +16,10 @@ def create_gradio_app():
     
     return app
 
+def create_gradio_interface():
+    """Alias pour create_gradio_app pour compatibilité"""
+    return create_gradio_app()
+
 def launch_app():
     """Lancer l'application Gradio"""
     app = create_gradio_app()

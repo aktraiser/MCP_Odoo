@@ -1,185 +1,120 @@
 ---
-title: MCP Odoo Server
+title: MCP Odoo CRM
 emoji: 🏢
-colorFrom: purple
-colorTo: blue
+colorFrom: blue
+colorTo: green
 sdk: gradio
-sdk_version: 4.0.0
+sdk_version: 4.44.0
 app_file: app.py
 pinned: false
 license: mit
 ---
 
-# Agent CRM MCP Server
+# MCP Odoo CRM 🏢
 
-Serveur MCP (Model Context Protocol) pour l'intégration avec Odoo CRM, offrant des outils d'automatisation et d'intelligence artificielle pour la gestion des prospects et opportunités.
+Une application **Model Context Protocol (MCP)** pour intégrer et gérer un système CRM Odoo via une interface Gradio moderne.
 
-## 🏗️ Architecture
+## 🚀 Fonctionnalités
 
-Le projet est maintenant structuré de manière modulaire :
+### 🔧 Serveur MCP
+- **Connexion Odoo** : Diagnostic et gestion de la connexion à votre instance Odoo
+- **Gestion des Leads** : Création et ingestion de prospects en lot
+- **Qualification IA** : Analyse automatique des leads avec OpenAI
+- **Propositions commerciales** : Génération d'emails personnalisés
+- **Ressources MCP** : Accès aux données CRM via le protocole MCP
 
-```
-MCP_Odoo/
-├── config/                 # Configuration et variables d'environnement
-│   ├── __init__.py
-│   └── settings.py
-├── odoo_connector/         # Gestion de la connexion Odoo
-│   ├── __init__.py
-│   └── connection.py
-├── mcp_tools/             # Outils MCP (ancienne version)
-│   ├── __init__.py
-│   └── crm_tools.py
-├── ui/                    # Interface utilisateur Gradio
-│   ├── __init__.py
-│   ├── utils.py
-│   ├── config_tab.py
-│   ├── crm_tab.py
-│   └── gradio_app.py
-├── mcp_server.py          # Serveur MCP principal (FastMCP)
-├── mcp_config.json        # Configuration MCP
-├── app.py                 # Point d'entrée principal
-└── requirements.txt       # Dépendances Python
-```
+### 🎨 Interface Gradio
+- **Configuration intuitive** : Paramétrage facile de la connexion Odoo
+- **Tableau de bord CRM** : Visualisation et gestion des leads
+- **Import en lot** : Chargement de fichiers CSV/Excel
+- **Génération de contenu** : Outils IA intégrés
 
-## 🚀 Modes de fonctionnement
+## 🛠️ Technologies
 
-### 1. Interface Gradio (Mode par défaut)
-Interface web conviviale pour tester et utiliser les outils CRM :
-
-```bash
-python app.py
-# ou
-python app.py --mode gradio
-```
-
-### 2. Serveur MCP
-Serveur MCP compatible avec les clients MCP (Claude Desktop, etc.) :
-
-```bash
-python app.py --mode mcp
-```
-
-## 🛠️ Outils MCP disponibles
-
-### Ressources
-- `odoo://crm/leads` - Liste tous les leads CRM
-- `odoo://crm/lead/{lead_id}` - Détails d'un lead spécifique
-- `odoo://crm/stages` - Liste des étapes CRM
-
-### Outils
-- `create_lead` - Créer un nouveau lead
-- `ingest_prospects` - Ingérer plusieurs prospects en lot
-- `qualify_lead` - Analyser un lead avec l'IA
-- `generate_offer` - Générer une proposition commerciale
-- `summarize_opportunity` - Résumer le statut d'une opportunité
+- **FastMCP** : Serveur MCP moderne et performant
+- **Gradio** : Interface web interactive
+- **OdooRPC** : Connexion native à Odoo
+- **OpenAI** : Intelligence artificielle pour la qualification
+- **Pydantic** : Validation des données
 
 ## 📋 Configuration
 
-### Variables d'environnement
-Créez un fichier `.env` avec :
+### Variables d'environnement (optionnelles)
 
-```env
+```bash
 ODOO_URL=votre-instance.odoo.com
-ODOO_DB=votre-base-de-donnees
-ODOO_LOGIN=votre-email@exemple.com
+ODOO_DB=nom-de-votre-base
+ODOO_LOGIN=votre-email
 ODOO_PASSWORD=votre-mot-de-passe
-OPENAI_API_KEY=sk-votre-cle-openai
+OPENAI_API_KEY=votre-clé-openai
 ```
 
-### Configuration MCP
-Modifiez `mcp_config.json` pour configurer le serveur MCP :
+### Configuration via l'interface
 
-```json
-{
-  "mcpServers": {
-    "odoo-crm": {
-      "command": "python",
-      "args": ["mcp_server.py"],
-      "env": {
-        "ODOO_URL": "votre-instance.odoo.com",
-        "ODOO_DB": "votre-base-de-donnees",
-        "ODOO_LOGIN": "votre-email@exemple.com",
-        "ODOO_PASSWORD": "votre-mot-de-passe",
-        "OPENAI_API_KEY": "sk-votre-cle-openai"
-      }
-    }
-  }
-}
-```
+1. Ouvrez l'onglet **Configuration**
+2. Saisissez vos informations de connexion Odoo
+3. Testez la connexion
+4. (Optionnel) Ajoutez votre clé OpenAI pour les fonctionnalités IA
 
-## 🔧 Installation
+## 🎯 Utilisation
 
-1. **Cloner le repository**
+### Création de leads
+1. Allez dans l'onglet **CRM**
+2. Remplissez le formulaire de création de lead
+3. Cliquez sur "Créer le Lead"
+
+### Import en lot
+1. Préparez un fichier CSV avec les colonnes : `name`, `partner_name`, `email_from`, `phone`, `description`
+2. Uploadez le fichier dans l'interface
+3. Lancez l'import
+
+### Qualification IA
+1. Sélectionnez un lead existant
+2. Utilisez l'outil de qualification pour obtenir une analyse automatique
+3. Générez des propositions commerciales personnalisées
+
+## 🔗 Intégration MCP
+
+Ce serveur peut être utilisé comme un serveur MCP standard :
+
 ```bash
-git clone <repository-url>
-cd MCP_Odoo
-```
+# Lancer le serveur MCP
+python mcp_server.py
 
-2. **Installer les dépendances**
-```bash
-pip install -r requirements.txt
-```
-
-3. **Configurer les variables d'environnement**
-```bash
-cp env.example .env
-# Éditer .env avec vos paramètres
-```
-
-4. **Lancer l'application**
-```bash
-# Interface Gradio
-python app.py
-
-# Serveur MCP
+# Ou via l'interface
 python app.py --mode mcp
 ```
 
-## 🧪 Utilisation avec Claude Desktop
+## 📊 Structure du projet
 
-Pour utiliser le serveur MCP avec Claude Desktop :
-
-1. Ajoutez la configuration dans votre fichier de configuration Claude Desktop
-2. Redémarrez Claude Desktop
-3. Le serveur "odoo-crm" sera disponible avec tous ses outils
-
-## 📚 Exemples d'utilisation
-
-### Créer un lead
-```python
-# Via l'outil MCP create_lead
-{
-  "name": "Prospect TechCorp",
-  "partner_name": "TechCorp Solutions",
-  "email_from": "contact@techcorp.com",
-  "phone": "+33 1 23 45 67 89",
-  "description": "Entreprise intéressée par nos solutions",
-  "expected_revenue": 15000.0,
-  "probability": 60
-}
 ```
+MCP_Odoo/
+├── app.py                 # Point d'entrée Gradio
+├── mcp_server.py         # Serveur MCP principal
+├── config/
+│   └── settings.py       # Configuration
+├── odoo_connector/
+│   └── connection.py     # Connexion Odoo
+├── ui/
+│   ├── gradio_app.py     # Interface principale
+│   ├── config_tab.py     # Onglet configuration
+│   ├── crm_tab.py        # Onglet CRM
+│   └── utils.py          # Utilitaires UI
+└── requirements.txt      # Dépendances
 
-### Ingérer plusieurs prospects
-```python
-# Via l'outil MCP ingest_prospects
-[
-  {
-    "name": "Lead 1",
-    "partner_name": "Entreprise 1",
-    "email_from": "contact1@exemple.com"
-  },
-  {
-    "name": "Lead 2", 
-    "partner_name": "Entreprise 2",
-    "email_from": "contact2@exemple.com"
-  }
-]
 ```
 
 ## 🤝 Contribution
 
-Les contributions sont les bienvenues ! Veuillez suivre la structure modulaire existante.
+Les contributions sont les bienvenues ! N'hésitez pas à :
+- Signaler des bugs
+- Proposer des améliorations
+- Ajouter de nouvelles fonctionnalités
 
 ## 📄 Licence
 
-[Votre licence ici] 
+MIT License - Voir le fichier LICENSE pour plus de détails.
+
+---
+
+**Développé avec ❤️ pour simplifier la gestion CRM avec Odoo** 

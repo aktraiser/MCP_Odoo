@@ -12,10 +12,11 @@ class Config:
     """Classe de configuration centralisée"""
     
     def __init__(self):
-        self.odoo_url = os.getenv("ODOO_URL")
-        self.odoo_db = os.getenv("ODOO_DB")
-        self.odoo_login = os.getenv("ODOO_LOGIN")
-        self.odoo_password = os.getenv("ODOO_PASSWORD")
+        # Configuration Odoo avec valeurs par défaut pour les tests et déploiement
+        self.odoo_url = os.getenv("ODOO_URL", "dasein.odoo.com")
+        self.odoo_db = os.getenv("ODOO_DB", "dasein")
+        self.odoo_login = os.getenv("ODOO_LOGIN", "lbometon@hotmail.fr")
+        self.odoo_password = os.getenv("ODOO_PASSWORD", "bupzEw-kasdy2-nubmoc")
         self.openai_api_key = os.getenv("OPENAI_API_KEY")
         
         # Configurer OpenAI si la clé est disponible
