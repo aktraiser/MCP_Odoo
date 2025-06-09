@@ -1,1 +1,0 @@
-# Odoo connector package 

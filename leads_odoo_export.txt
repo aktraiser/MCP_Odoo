@@ -1,0 +1,854 @@
+===============================================================================
+                    EXPORT COMPLET DES LEADS ODOO - DASEIN
+                           Généré le 3 juin 2025
+===============================================================================
+
+RÉSUMÉ GÉNÉRAL
+==============
+- Total des leads         : 74
+- CA espéré total         : 965 500€
+- Leads chauds           : 62
+- Leads gagnés           : 0
+- CA réalisé             : 0€
+
+DÉTAIL DES LEADS (par ordre chronologique inversé)
+================================================
+
+Lead #76 - Lead - Manufacture EcoTech
+-------------------------------------
+Entreprise      : EcoTech Manufacturing
+Email           : commercial@ecotech-manu.com
+Téléphone       : +33 5 67 89 01 23
+Stage           : New
+Commercial      : aktraiser
+CA espéré       : 18 000€
+Probabilité     : 0%
+Date création   : 2025-05-28 12:31:04
+
+Lead #75 - Prospect - Cabinet Conseil Stratégique
+-------------------------------------------------
+Entreprise      : Conseil & Stratégie
+Email           : partenaire@conseil-strategie.fr
+Téléphone       : +33 4 56 78 90 12
+Stage           : New
+Commercial      : aktraiser
+CA espéré       : 12 000€
+Probabilité     : 50%
+Date création   : 2025-05-28 12:31:04
+
+Lead #74 - Opportunité - Groupe Retail Plus
+-------------------------------------------
+Entreprise      : Retail Plus Group
+Email           : direction@retailplus.com
+Téléphone       : +33 2 34 56 78 90
+Stage           : New
+Commercial      : aktraiser
+CA espéré       : 25 000€
+Probabilité     : 80%
+Date création   : 2025-05-28 12:31:03
+
+Lead #73 - Lead - Startup InnovateLab
+------------------------------------
+Entreprise      : InnovateLab
+Email           : ceo@innovatelab.fr
+Téléphone       : +33 6 78 90 12 34
+Stage           : New
+Commercial      : aktraiser
+CA espéré       : 8 500€
+Probabilité     : 40%
+Date création   : 2025-05-28 12:31:03
+
+Lead #72 - Prospect - Entreprise TechCorp
+----------------------------------------
+Entreprise      : TechCorp Solutions
+Email           : contact@techcorp.com
+Téléphone       : +33 1 23 45 67 89
+Stage           : New
+Commercial      : aktraiser
+CA espéré       : 15 000€
+Probabilité     : 60%
+Date création   : 2025-05-28 12:31:02
+
+Lead #69 - ds
+-------------
+Entreprise      : dsl
+Email           : fdsfsd@fdfdfd.com
+Téléphone       : 0677889900
+Stage           : Qualified
+Commercial      : aktraiser
+CA espéré       : 0€
+Probabilité     : 0%
+Date création   : 2025-05-28 09:46:48
+
+Lead #68 - Lead - Manufacture EcoTech
+-------------------------------------
+Entreprise      : EcoTech Manufacturing
+Email           : commercial@ecotech-manu.com
+Téléphone       : +33 5 67 89 01 23
+Stage           : New
+Commercial      : OdooBot
+CA espéré       : 18 000€
+Probabilité     : 35%
+Date création   : 2025-05-28 09:45:54
+
+Lead #67 - Prospect - Cabinet Conseil Stratégique
+-------------------------------------------------
+Entreprise      : Conseil & Stratégie
+Email           : partenaire@conseil-strategie.fr
+Téléphone       : +33 4 56 78 90 12
+Stage           : New
+Commercial      : OdooBot
+CA espéré       : 12 000€
+Probabilité     : 50%
+Date création   : 2025-05-28 09:45:54
+
+Lead #66 - Opportunité - Groupe Retail Plus
+-------------------------------------------
+Entreprise      : Retail Plus Group
+Email           : direction@retailplus.com
+Téléphone       : +33 2 34 56 78 90
+Stage           : New
+Commercial      : OdooBot
+CA espéré       : 25 000€
+Probabilité     : 80%
+Date création   : 2025-05-28 09:45:52
+
+Lead #65 - Lead - Startup InnovateLab
+------------------------------------
+Entreprise      : InnovateLab
+Email           : ceo@innovatelab.fr
+Téléphone       : +33 6 78 90 12 34
+Stage           : New
+Commercial      : OdooBot
+CA espéré       : 8 500€
+Probabilité     : 40%
+Date création   : 2025-05-28 09:45:50
+
+Lead #64 - Prospect - Entreprise TechCorp
+----------------------------------------
+Entreprise      : TechCorp Solutions
+Email           : contact@techcorp.com
+Téléphone       : +33 1 23 45 67 89
+Stage           : New
+Commercial      : OdooBot
+CA espéré       : 15 000€
+Probabilité     : 60%
+Date création   : 2025-05-28 09:45:49
+
+Lead #63 - Lead - Manufacture EcoTech
+-------------------------------------
+Entreprise      : EcoTech Manufacturing
+Email           : commercial@ecotech-manu.com
+Téléphone       : +33 5 67 89 01 23
+Stage           : New
+Commercial      : OdooBot
+CA espéré       : 18 000€
+Probabilité     : 35%
+Date création   : 2025-05-28 09:15:08
+
+Lead #62 - Prospect - Cabinet Conseil Stratégique
+-------------------------------------------------
+Entreprise      : Conseil & Stratégie
+Email           : partenaire@conseil-strategie.fr
+Téléphone       : +33 4 56 78 90 12
+Stage           : New
+Commercial      : OdooBot
+CA espéré       : 12 000€
+Probabilité     : 50%
+Date création   : 2025-05-28 09:15:07
+
+Lead #61 - Opportunité - Groupe Retail Plus
+-------------------------------------------
+Entreprise      : Retail Plus Group
+Email           : direction@retailplus.com
+Téléphone       : +33 2 34 56 78 90
+Stage           : New
+Commercial      : OdooBot
+CA espéré       : 25 000€
+Probabilité     : 80%
+Date création   : 2025-05-28 09:15:07
+
+Lead #60 - Lead - Startup InnovateLab
+------------------------------------
+Entreprise      : InnovateLab
+Email           : ceo@innovatelab.fr
+Téléphone       : +33 6 78 90 12 34
+Stage           : New
+Commercial      : OdooBot
+CA espéré       : 8 500€
+Probabilité     : 40%
+Date création   : 2025-05-28 09:15:07
+
+Lead #59 - Prospect - Entreprise TechCorp
+----------------------------------------
+Entreprise      : TechCorp Solutions
+Email           : contact@techcorp.com
+Téléphone       : +33 1 23 45 67 89
+Stage           : New
+Commercial      : OdooBot
+CA espéré       : 15 000€
+Probabilité     : 60%
+Date création   : 2025-05-28 09:15:06
+
+Lead #58 - Lead - Manufacture EcoTech
+-------------------------------------
+Entreprise      : EcoTech Manufacturing
+Email           : commercial@ecotech-manu.com
+Téléphone       : +33 5 67 89 01 23
+Stage           : New
+Commercial      : OdooBot
+CA espéré       : 18 000€
+Probabilité     : 35%
+Date création   : 2025-05-28 09:05:24
+
+Lead #57 - Prospect - Cabinet Conseil Stratégique
+-------------------------------------------------
+Entreprise      : Conseil & Stratégie
+Email           : partenaire@conseil-strategie.fr
+Téléphone       : +33 4 56 78 90 12
+Stage           : New
+Commercial      : OdooBot
+CA espéré       : 12 000€
+Probabilité     : 50%
+Date création   : 2025-05-28 09:05:24
+
+Lead #56 - Opportunité - Groupe Retail Plus
+-------------------------------------------
+Entreprise      : Retail Plus Group
+Email           : direction@retailplus.com
+Téléphone       : +33 2 34 56 78 90
+Stage           : New
+Commercial      : OdooBot
+CA espéré       : 25 000€
+Probabilité     : 80%
+Date création   : 2025-05-28 09:05:24
+
+Lead #55 - Lead - Startup InnovateLab
+------------------------------------
+Entreprise      : InnovateLab
+Email           : ceo@innovatelab.fr
+Téléphone       : +33 6 78 90 12 34
+Stage           : New
+Commercial      : OdooBot
+CA espéré       : 8 500€
+Probabilité     : 40%
+Date création   : 2025-05-28 09:05:23
+
+Lead #54 - Prospect - Entreprise TechCorp
+----------------------------------------
+Entreprise      : TechCorp Solutions
+Email           : contact@techcorp.com
+Téléphone       : +33 1 23 45 67 89
+Stage           : New
+Commercial      : OdooBot
+CA espéré       : 15 000€
+Probabilité     : 60%
+Date création   : 2025-05-28 09:05:23
+
+Lead #53 - Lead - Manufacture EcoTech
+-------------------------------------
+Entreprise      : EcoTech Manufacturing
+Email           : commercial@ecotech-manu.com
+Téléphone       : +33 5 67 89 01 23
+Stage           : New
+Commercial      : OdooBot
+CA espéré       : 18 000€
+Probabilité     : 35%
+Date création   : 2025-05-28 09:03:48
+
+Lead #52 - Prospect - Cabinet Conseil Stratégique
+-------------------------------------------------
+Entreprise      : Conseil & Stratégie
+Email           : partenaire@conseil-strategie.fr
+Téléphone       : +33 4 56 78 90 12
+Stage           : New
+Commercial      : OdooBot
+CA espéré       : 12 000€
+Probabilité     : 50%
+Date création   : 2025-05-28 09:03:47
+
+Lead #51 - Opportunité - Groupe Retail Plus
+-------------------------------------------
+Entreprise      : Retail Plus Group
+Email           : direction@retailplus.com
+Téléphone       : +33 2 34 56 78 90
+Stage           : New
+Commercial      : OdooBot
+CA espéré       : 25 000€
+Probabilité     : 80%
+Date création   : 2025-05-28 09:03:47
+
+Lead #50 - Lead - Startup InnovateLab
+------------------------------------
+Entreprise      : InnovateLab
+Email           : ceo@innovatelab.fr
+Téléphone       : +33 6 78 90 12 34
+Stage           : New
+Commercial      : OdooBot
+CA espéré       : 8 500€
+Probabilité     : 40%
+Date création   : 2025-05-28 09:03:47
+
+Lead #49 - Prospect - Entreprise TechCorp
+----------------------------------------
+Entreprise      : TechCorp Solutions
+Email           : contact@techcorp.com
+Téléphone       : +33 1 23 45 67 89
+Stage           : New
+Commercial      : OdooBot
+CA espéré       : 15 000€
+Probabilité     : 60%
+Date création   : 2025-05-28 09:03:45
+
+Lead #48 - Lead - Manufacture EcoTech
+-------------------------------------
+Entreprise      : EcoTech Manufacturing
+Email           : commercial@ecotech-manu.com
+Téléphone       : +33 5 67 89 01 23
+Stage           : New
+Commercial      : OdooBot
+CA espéré       : 18 000€
+Probabilité     : 35%
+Date création   : 2025-05-28 08:58:50
+
+Lead #47 - Prospect - Cabinet Conseil Stratégique
+-------------------------------------------------
+Entreprise      : Conseil & Stratégie
+Email           : partenaire@conseil-strategie.fr
+Téléphone       : +33 4 56 78 90 12
+Stage           : New
+Commercial      : OdooBot
+CA espéré       : 12 000€
+Probabilité     : 50%
+Date création   : 2025-05-28 08:58:49
+
+Lead #46 - Opportunité - Groupe Retail Plus
+-------------------------------------------
+Entreprise      : Retail Plus Group
+Email           : direction@retailplus.com
+Téléphone       : +33 2 34 56 78 90
+Stage           : New
+Commercial      : OdooBot
+CA espéré       : 25 000€
+Probabilité     : 80%
+Date création   : 2025-05-28 08:58:49
+
+Lead #45 - Lead - Startup InnovateLab
+------------------------------------
+Entreprise      : InnovateLab
+Email           : ceo@innovatelab.fr
+Téléphone       : +33 6 78 90 12 34
+Stage           : New
+Commercial      : OdooBot
+CA espéré       : 8 500€
+Probabilité     : 40%
+Date création   : 2025-05-28 08:58:49
+
+Lead #44 - Prospect - Entreprise TechCorp
+----------------------------------------
+Entreprise      : TechCorp Solutions
+Email           : contact@techcorp.com
+Téléphone       : +33 1 23 45 67 89
+Stage           : New
+Commercial      : OdooBot
+CA espéré       : 15 000€
+Probabilité     : 60%
+Date création   : 2025-05-28 08:58:48
+
+Lead #43 - Prospect MCP 2
+-------------------------
+Entreprise      : Company MCP 2
+Email           : prospect2-mcp@example.com
+Téléphone       : -
+Stage           : New
+Commercial      : aktraiser
+CA espéré       : 0€
+Probabilité     : 0%
+Date création   : 2025-05-28 08:54:24
+
+Lead #42 - Prospect MCP 1
+-------------------------
+Entreprise      : Company MCP 1
+Email           : prospect1-mcp@example.com
+Téléphone       : -
+Stage           : New
+Commercial      : aktraiser
+CA espéré       : 0€
+Probabilité     : 0%
+Date création   : 2025-05-28 08:54:24
+
+Lead #41 - Test MCP Server
+--------------------------
+Entreprise      : Test Company MCP Server
+Email           : test-server@example.com
+Téléphone       : -
+Stage           : New
+Commercial      : aktraiser
+CA espéré       : 0€
+Probabilité     : 0%
+Date création   : 2025-05-28 08:54:24
+
+Lead #40 - Lead - Manufacture EcoTech
+-------------------------------------
+Entreprise      : EcoTech Manufacturing
+Email           : commercial@ecotech-manu.com
+Téléphone       : +33 5 67 89 01 23
+Stage           : New
+Commercial      : OdooBot
+CA espéré       : 18 000€
+Probabilité     : 35%
+Date création   : 2025-05-28 08:52:58
+
+Lead #39 - Prospect - Cabinet Conseil Stratégique
+-------------------------------------------------
+Entreprise      : Conseil & Stratégie
+Email           : partenaire@conseil-strategie.fr
+Téléphone       : +33 4 56 78 90 12
+Stage           : New
+Commercial      : OdooBot
+CA espéré       : 12 000€
+Probabilité     : 50%
+Date création   : 2025-05-28 08:52:57
+
+Lead #38 - Opportunité - Groupe Retail Plus
+-------------------------------------------
+Entreprise      : Retail Plus Group
+Email           : direction@retailplus.com
+Téléphone       : +33 2 34 56 78 90
+Stage           : New
+Commercial      : OdooBot
+CA espéré       : 25 000€
+Probabilité     : 80%
+Date création   : 2025-05-28 08:52:56
+
+Lead #37 - Lead - Startup InnovateLab
+------------------------------------
+Entreprise      : InnovateLab
+Email           : ceo@innovatelab.fr
+Téléphone       : +33 6 78 90 12 34
+Stage           : New
+Commercial      : OdooBot
+CA espéré       : 8 500€
+Probabilité     : 40%
+Date création   : 2025-05-28 08:52:55
+
+Lead #36 - Prospect - Entreprise TechCorp
+----------------------------------------
+Entreprise      : TechCorp Solutions
+Email           : contact@techcorp.com
+Téléphone       : +33 1 23 45 67 89
+Stage           : New
+Commercial      : OdooBot
+CA espéré       : 15 000€
+Probabilité     : 60%
+Date création   : 2025-05-28 08:52:54
+
+Lead #35 - Lead - Manufacture EcoTech
+-------------------------------------
+Entreprise      : EcoTech Manufacturing
+Email           : commercial@ecotech-manu.com
+Téléphone       : +33 5 67 89 01 23
+Stage           : New
+Commercial      : OdooBot
+CA espéré       : 18 000€
+Probabilité     : 35%
+Date création   : 2025-05-28 08:15:35
+
+Lead #34 - Prospect - Cabinet Conseil Stratégique
+-------------------------------------------------
+Entreprise      : Conseil & Stratégie
+Email           : partenaire@conseil-strategie.fr
+Téléphone       : +33 4 56 78 90 12
+Stage           : New
+Commercial      : OdooBot
+CA espéré       : 12 000€
+Probabilité     : 50%
+Date création   : 2025-05-28 08:15:35
+
+Lead #33 - Opportunité - Groupe Retail Plus
+-------------------------------------------
+Entreprise      : Retail Plus Group
+Email           : direction@retailplus.com
+Téléphone       : +33 2 34 56 78 90
+Stage           : New
+Commercial      : OdooBot
+CA espéré       : 25 000€
+Probabilité     : 80%
+Date création   : 2025-05-28 08:15:34
+
+Lead #32 - Lead - Startup InnovateLab
+------------------------------------
+Entreprise      : InnovateLab
+Email           : ceo@innovatelab.fr
+Téléphone       : +33 6 78 90 12 34
+Stage           : New
+Commercial      : OdooBot
+CA espéré       : 8 500€
+Probabilité     : 40%
+Date création   : 2025-05-28 08:15:34
+
+Lead #31 - Prospect - Entreprise TechCorp
+----------------------------------------
+Entreprise      : TechCorp Solutions
+Email           : contact@techcorp.com
+Téléphone       : +33 1 23 45 67 89
+Stage           : New
+Commercial      : OdooBot
+CA espéré       : 15 000€
+Probabilité     : 60%
+Date création   : 2025-05-28 08:15:34
+
+Lead #30 - Prospect MCP 2
+-------------------------
+Entreprise      : Company MCP 2
+Email           : prospect2-mcp@example.com
+Téléphone       : -
+Stage           : New
+Commercial      : aktraiser
+CA espéré       : 0€
+Probabilité     : 0%
+Date création   : 2025-05-28 08:02:20
+
+Lead #29 - Prospect MCP 1
+-------------------------
+Entreprise      : Company MCP 1
+Email           : prospect1-mcp@example.com
+Téléphone       : -
+Stage           : New
+Commercial      : aktraiser
+CA espéré       : 0€
+Probabilité     : 0%
+Date création   : 2025-05-28 08:02:20
+
+Lead #28 - Test MCP Server
+--------------------------
+Entreprise      : Test Company MCP Server
+Email           : test-server@example.com
+Téléphone       : -
+Stage           : New
+Commercial      : aktraiser
+CA espéré       : 0€
+Probabilité     : 0%
+Date création   : 2025-05-28 08:02:20
+
+Lead #27 - Prospect 3 MCP
+-------------------------
+Entreprise      : Company 3 MCP
+Email           : prospect3@example.com
+Téléphone       : -
+Stage           : New
+Commercial      : aktraiser
+CA espéré       : 0€
+Probabilité     : 0%
+Date création   : 2025-05-28 08:00:42
+
+Lead #26 - Prospect 2 MCP
+-------------------------
+Entreprise      : Company 2 MCP
+Email           : prospect2@example.com
+Téléphone       : -
+Stage           : New
+Commercial      : aktraiser
+CA espéré       : 0€
+Probabilité     : 0%
+Date création   : 2025-05-28 08:00:42
+
+Lead #25 - Prospect 1 MCP
+-------------------------
+Entreprise      : Company 1 MCP
+Email           : prospect1@example.com
+Téléphone       : -
+Stage           : New
+Commercial      : aktraiser
+CA espéré       : 0€
+Probabilité     : 0%
+Date création   : 2025-05-28 08:00:42
+
+Lead #24 - Test Lead MCP
+------------------------
+Entreprise      : Test Company MCP
+Email           : test-mcp@example.com
+Téléphone       : +33123456789
+Stage           : New
+Commercial      : aktraiser
+CA espéré       : 0€
+Probabilité     : 0%
+Date création   : 2025-05-28 08:00:41
+
+Lead #23 - Test Lead Diagnostic Direct
+--------------------------------------
+Entreprise      : Test Company Direct
+Email           : test-direct@example.com
+Téléphone       : -
+Stage           : New
+Commercial      : aktraiser
+CA espéré       : 0€
+Probabilité     : 0%
+Date création   : 2025-05-28 07:58:22
+
+Lead #22 - Lead - Manufacture EcoTech
+-------------------------------------
+Entreprise      : EcoTech Manufacturing
+Email           : commercial@ecotech-manu.com
+Téléphone       : +33 5 67 89 01 23
+Stage           : New
+Commercial      : OdooBot
+CA espéré       : 18 000€
+Probabilité     : 35%
+Date création   : 2025-05-28 07:47:36
+
+Lead #21 - Prospect - Cabinet Conseil Stratégique
+-------------------------------------------------
+Entreprise      : Conseil & Stratégie
+Email           : partenaire@conseil-strategie.fr
+Téléphone       : +33 4 56 78 90 12
+Stage           : New
+Commercial      : OdooBot
+CA espéré       : 12 000€
+Probabilité     : 50%
+Date création   : 2025-05-28 07:47:36
+
+Lead #20 - Opportunité - Groupe Retail Plus
+-------------------------------------------
+Entreprise      : Retail Plus Group
+Email           : direction@retailplus.com
+Téléphone       : +33 2 34 56 78 90
+Stage           : New
+Commercial      : OdooBot
+CA espéré       : 25 000€
+Probabilité     : 80%
+Date création   : 2025-05-28 07:47:36
+
+Lead #19 - Lead - Startup InnovateLab
+------------------------------------
+Entreprise      : InnovateLab
+Email           : ceo@innovatelab.fr
+Téléphone       : +33 6 78 90 12 34
+Stage           : New
+Commercial      : OdooBot
+CA espéré       : 8 500€
+Probabilité     : 40%
+Date création   : 2025-05-28 07:47:35
+
+Lead #18 - Prospect - Entreprise TechCorp
+----------------------------------------
+Entreprise      : TechCorp Solutions
+Email           : contact@techcorp.com
+Téléphone       : +33 1 23 45 67 89
+Stage           : New
+Commercial      : OdooBot
+CA espéré       : 15 000€
+Probabilité     : 60%
+Date création   : 2025-05-28 07:47:34
+
+Lead #17 - Lead - Manufacture EcoTech
+-------------------------------------
+Entreprise      : EcoTech Manufacturing
+Email           : commercial@ecotech-manu.com
+Téléphone       : +33 5 67 89 01 23
+Stage           : New
+Commercial      : OdooBot
+CA espéré       : 18 000€
+Probabilité     : 35%
+Date création   : 2025-05-28 07:43:18
+
+Lead #16 - Prospect - Cabinet Conseil Stratégique
+-------------------------------------------------
+Entreprise      : Conseil & Stratégie
+Email           : partenaire@conseil-strategie.fr
+Téléphone       : +33 4 56 78 90 12
+Stage           : New
+Commercial      : OdooBot
+CA espéré       : 12 000€
+Probabilité     : 50%
+Date création   : 2025-05-28 07:43:17
+
+Lead #15 - Opportunité - Groupe Retail Plus
+-------------------------------------------
+Entreprise      : Retail Plus Group
+Email           : direction@retailplus.com
+Téléphone       : +33 2 34 56 78 90
+Stage           : New
+Commercial      : OdooBot
+CA espéré       : 25 000€
+Probabilité     : 80%
+Date création   : 2025-05-28 07:43:17
+
+Lead #14 - Lead - Startup InnovateLab
+------------------------------------
+Entreprise      : InnovateLab
+Email           : ceo@innovatelab.fr
+Téléphone       : +33 6 78 90 12 34
+Stage           : New
+Commercial      : OdooBot
+CA espéré       : 8 500€
+Probabilité     : 40%
+Date création   : 2025-05-28 07:43:17
+
+Lead #13 - Prospect - Entreprise TechCorp
+----------------------------------------
+Entreprise      : TechCorp Solutions
+Email           : contact@techcorp.com
+Téléphone       : +33 1 23 45 67 89
+Stage           : New
+Commercial      : OdooBot
+CA espéré       : 15 000€
+Probabilité     : 60%
+Date création   : 2025-05-28 07:43:16
+
+Lead #12 - Lead - Manufacture EcoTech
+-------------------------------------
+Entreprise      : EcoTech Manufacturing
+Email           : commercial@ecotech-manu.com
+Téléphone       : +33 5 67 89 01 23
+Stage           : New
+Commercial      : OdooBot
+CA espéré       : 18 000€
+Probabilité     : 35%
+Date création   : 2025-05-28 07:24:11
+
+Lead #11 - Prospect - Cabinet Conseil Stratégique
+-------------------------------------------------
+Entreprise      : Conseil & Stratégie
+Email           : partenaire@conseil-strategie.fr
+Téléphone       : +33 4 56 78 90 12
+Stage           : New
+Commercial      : OdooBot
+CA espéré       : 12 000€
+Probabilité     : 50%
+Date création   : 2025-05-28 07:24:10
+
+Lead #10 - Opportunité - Groupe Retail Plus
+-------------------------------------------
+Entreprise      : Retail Plus Group
+Email           : direction@retailplus.com
+Téléphone       : +33 2 34 56 78 90
+Stage           : New
+Commercial      : OdooBot
+CA espéré       : 25 000€
+Probabilité     : 80%
+Date création   : 2025-05-28 07:24:09
+
+Lead #9 - Lead - Startup InnovateLab
+-----------------------------------
+Entreprise      : InnovateLab
+Email           : ceo@innovatelab.fr
+Téléphone       : +33 6 78 90 12 34
+Stage           : New
+Commercial      : OdooBot
+CA espéré       : 8 500€
+Probabilité     : 40%
+Date création   : 2025-05-28 07:24:08
+
+Lead #8 - Prospect - Entreprise TechCorp
+---------------------------------------
+Entreprise      : TechCorp Solutions
+Email           : contact@techcorp.com
+Téléphone       : +33 1 23 45 67 89
+Stage           : New
+Commercial      : OdooBot
+CA espéré       : 15 000€
+Probabilité     : 60%
+Date création   : 2025-05-28 07:24:07
+
+Lead #7 - Lead - Manufacture EcoTech
+------------------------------------
+Entreprise      : EcoTech Manufacturing
+Email           : commercial@ecotech-manu.com
+Téléphone       : +33 5 67 89 01 23
+Stage           : New
+Commercial      : OdooBot
+CA espéré       : 18 000€
+Probabilité     : 35%
+Date création   : 2025-05-28 05:13:49
+
+Lead #6 - Prospect - Cabinet Conseil Stratégique
+------------------------------------------------
+Entreprise      : Conseil & Stratégie
+Email           : partenaire@conseil-strategie.fr
+Téléphone       : +33 4 56 78 90 12
+Stage           : New
+Commercial      : OdooBot
+CA espéré       : 12 000€
+Probabilité     : 50%
+Date création   : 2025-05-28 05:13:49
+
+Lead #5 - Opportunité - Groupe Retail Plus
+------------------------------------------
+Entreprise      : Retail Plus Group
+Email           : direction@retailplus.com
+Téléphone       : +33 2 34 56 78 90
+Stage           : New
+Commercial      : OdooBot
+CA espéré       : 25 000€
+Probabilité     : 80%
+Date création   : 2025-05-28 05:13:48
+
+Lead #4 - Lead - Startup InnovateLab
+-----------------------------------
+Entreprise      : InnovateLab
+Email           : ceo@innovatelab.fr
+Téléphone       : +33 6 78 90 12 34
+Stage           : New
+Commercial      : OdooBot
+CA espéré       : 8 500€
+Probabilité     : 40%
+Date création   : 2025-05-28 05:13:47
+
+Lead #3 - Prospect - Entreprise TechCorp
+---------------------------------------
+Entreprise      : TechCorp Solutions
+Email           : contact@techcorp.com
+Téléphone       : +33 1 23 45 67 89
+Stage           : New
+Commercial      : OdooBot
+CA espéré       : 15 000€
+Probabilité     : 60%
+Date création   : 2025-05-28 05:13:47
+
+Lead #2 - Lead - Startup InnovateLab
+-----------------------------------
+Entreprise      : InnovateLab
+Email           : ceo@innovatelab.fr
+Téléphone       : +33 6 78 90 12 34
+Stage           : New
+Commercial      : OdooBot
+CA espéré       : 8 500€
+Probabilité     : 40%
+Date création   : 2025-05-28 05:12:31
+
+Lead #1 - Prospect - Entreprise TechCorp
+---------------------------------------
+Entreprise      : TechCorp Solutions
+Email           : contact@techcorp.com
+Téléphone       : +33 1 23 45 67 89
+Stage           : New
+Commercial      : OdooBot
+CA espéré       : 15 000€
+Probabilité     : 60%
+Date création   : 2025-05-28 05:12:30
+
+===============================================================================
+ANALYSE STATISTIQUE RAPIDE
+===============================================================================
+
+RÉPARTITION PAR ENTREPRISE UNIQUE :
+- Retail Plus Group      : 25 000€ (80% probabilité) - PRIORITÉ HAUTE
+- EcoTech Manufacturing   : 18 000€ (35% probabilité) 
+- TechCorp Solutions     : 15 000€ (60% probabilité) - PRIORITÉ MOYENNE
+- Conseil & Stratégie    : 12 000€ (50% probabilité)
+- InnovateLab           : 8 500€ (40% probabilité)
+
+RÉPARTITION PAR COMMERCIAL :
+- aktraiser : Leads avec valeur réelle + leads de test
+- OdooBot   : Leads générés automatiquement (doublons)
+
+RECOMMANDATIONS :
+1. Nettoyer les doublons (même entreprise, multiples leads)
+2. Supprimer les leads de test MCP
+3. Se concentrer sur Retail Plus Group (80% de probabilité)
+4. Relancer TechCorp Solutions (60% de probabilité)
+
+===============================================================================
+Fin de l'export - Généré par le serveur MCP Odoo
+=============================================================================== 

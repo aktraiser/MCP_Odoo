@@ -1,28 +1,30 @@
-# Gradio avec support MCP
-gradio[mcp]>=4.44.0
+# Dépendances MCP-Odoo Server
+# Serveur MCP pour l'intégration Odoo ERP
 
-# Connecteur Odoo
-xmlrpc
+# === MCP Core ===
+mcp>=1.0.0
+fastmcp>=0.1.0
 
-# Utilitaires
-python-dotenv
+# === Data Validation ===
 pydantic>=2.0.0
-typing-extensions
 
-# Logging et debugging
-colorlog
+# === HTTP Client ===
+httpx>=0.25.0
 
-# Serveur web
-uvicorn
-fastapi
-
-# Optionnel pour les clients MCP
-anthropic
-mcp
-
-odoorpc>=0.10.0
-openai>=1.0.0
+# === Odoo Integration (optionnel pour XML-RPC direct) ===
+OdooRPC>=0.10.1
 requests>=2.31.0
-fastmcp>=2.5.1
-websockets>=14.0
-starlette>=0.41.3 
+
+# === Configuration ===
+python-dotenv>=1.0.0
+
+# === AI/ML - LlamaIndex Cloud ===
+llama-index>=0.10.0
+llama-index-indices-managed-llama-cloud>=0.3.0
+
+# === AI/ML - OpenAI (optionnel) ===
+openai>=1.0.0
+
+# === Development & Testing ===
+pytest>=7.0.0
+pytest-asyncio>=0.21.0 

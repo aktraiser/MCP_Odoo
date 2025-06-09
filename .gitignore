@@ -157,4 +157,4 @@ celerybeat.pid
 .spyproject
 
 # Rope project settings
-flagged/ 
+flagged/ src/MCP_clone/
